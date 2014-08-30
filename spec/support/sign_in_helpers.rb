@@ -7,7 +7,6 @@ module SignInHelpers
     visit root_path
     fill_in 'Email address', with: email
     click_button 'Sign In'
-    click_link 'Add a new todo'
   end
 end
 
