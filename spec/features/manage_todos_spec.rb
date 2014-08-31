@@ -26,6 +26,14 @@ feature 'Manage Todos' do
     user_sees_completed_todo_item('Buy some milk')
   end
 
+  scenario 'delete todos' do
+    sign_in
+    create_todo_with_description 'Buy some milk'
+    delete_todo('Buy some milk')
+
+    user_does_not_see_todo_item 'Buy some milk'
+  end
+
   def create_todo_with_description(description)
     click_link 'Add a new todo'
     fill_in 'Description', with: description
@@ -47,6 +55,12 @@ feature 'Manage Todos' do
   def complete_todo(description)
     within "li.todo:contains('#{description}')" do
       click_link 'Complete'
+    end
+  end
+
+  def delete_todo(description)
+    within "li.todo:contains('#{description}')" do
+      click_link 'Delete'
     end
   end
 end
